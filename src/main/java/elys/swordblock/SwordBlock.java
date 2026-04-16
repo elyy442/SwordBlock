@@ -4,6 +4,7 @@ import elys.swordblock.config.Config;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.text.Text;
 
 public class SwordBlock implements ClientModInitializer {
@@ -11,6 +12,8 @@ public class SwordBlock implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		Config.load();
+
+		ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> UpdateChecker.check());
 
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
 			dispatcher.register(ClientCommandManager.literal("swordblock")

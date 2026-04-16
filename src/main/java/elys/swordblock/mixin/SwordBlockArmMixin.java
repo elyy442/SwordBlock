@@ -15,16 +15,19 @@ public abstract class SwordBlockArmMixin {
 
     @Inject(method = "setAngles(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;)V", at = @At("TAIL"))
     private void applySwordBlockArm(PlayerEntityRenderState state, CallbackInfo ci) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || state.id != client.player.getId()) return;
-        if (!Config.swordBlockEnabled || Config.isInBedwars()) return;
-        if (client.player.handSwinging) return;
-        if (!client.player.getMainHandStack().isIn(ItemTags.SWORDS)) return;
-        if (!client.options.useKey.isPressed()) return;
+        try {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client == null || client.player == null || state.id != client.player.getId()) return;
+            if (!Config.swordBlockEnabled || Config.isInBedwars()) return;
+            if (client.player.handSwingProgress > 0.0f && client.player.handSwingProgress < 0.9f) return;
+            if (!client.player.getMainHandStack().isIn(ItemTags.SWORDS)) return;
+            if (!client.options.useKey.isPressed()) return;
 
-        PlayerEntityModel model = (PlayerEntityModel) (Object) this;
-        model.rightArm.pitch = (float) Math.toRadians(Config.tpRotationX);
-        model.rightArm.yaw   = (float) Math.toRadians(Config.tpRotationY);
-        model.rightArm.roll  = (float) Math.toRadians(Config.tpRotationZ);
+            PlayerEntityModel model = (PlayerEntityModel) (Object) this;
+            if (model.rightArm == null) return;
+            model.rightArm.pitch = (float) Math.toRadians(Config.tpRotationX);
+            model.rightArm.yaw   = (float) Math.toRadians(Config.tpRotationY);
+            model.rightArm.roll  = (float) Math.toRadians(Config.tpRotationZ);
+        } catch (Throwable ignored) {}
     }
 }

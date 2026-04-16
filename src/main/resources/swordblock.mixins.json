@@ -6,8 +6,7 @@
 	"client": [
 		"SwordBlockMixin",
 		"SwordBlockArmMixin",
-		"SwordBlockBreakMixin",
-		"SwordBlockSwingMixin"
+		"SwordBlockBreakMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

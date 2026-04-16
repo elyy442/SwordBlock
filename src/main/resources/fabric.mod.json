@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "swordblock",
-	"version": "1.0.0",
+	"version": "2.0.1",
 	"name": "SwordBlock",
 	"description": "Brings back 1.8 sword blocking visuals in 1.21",
 	"authors": [
