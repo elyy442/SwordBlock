@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "elys.swordblock.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [],
+	"client": [
+		"SwordBlockMixin",
+		"SwordBlockArmMixin",
+		"SwordBlockBreakMixin",
+		"SwordBlockSwingMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
